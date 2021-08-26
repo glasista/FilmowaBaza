@@ -10,9 +10,9 @@ namespace FilmowaBaza.Domain.Entities
         public string Description { get; protected set; }
         public decimal Rating { get; protected set; }
         public DateTime ReleaseDate { get; protected set; }
-        public virtual List<Category> Categories { get; protected set; }
-        public virtual List<Actor> Actors { get; protected set; }
-        public virtual List<Rate> Rates { get; protected set; }
-        public virtual List<Comment> Comments { get; protected set; }
+        public virtual IList<Category> Categories { get; protected set; }
+        public virtual IList<Actor> Actors { get; protected set; }
+        public virtual IList<Rate> Rates { get; protected set; }
+        public virtual IList<Comment> Comments { get; protected set; }
     }
 }

@@ -8,6 +8,6 @@ namespace FilmowaBaza.Domain.Entities
     {
         public string Name { get; protected set; }
         public string Surname { get; protected set; }
-        public virtual List<Movie> Movies { get; protected set; }
+        public virtual IList<Movie> Movies { get; protected set; }
     }
 }
