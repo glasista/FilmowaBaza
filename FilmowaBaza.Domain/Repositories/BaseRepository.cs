@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using FilmowaBaza.Domain.Exceptions;
 
 namespace FilmowaBaza.Domain.Repositories
 {
@@ -26,6 +27,9 @@ namespace FilmowaBaza.Domain.Repositories
 
         public async Task DeleteAsync(T entity)
         {
+            if (entity == null)
+                throw new AppException(ErrorCode.NotFound);
+
             await Task.FromResult(_dbSet.Remove(entity));
             await SaveChangesAsync();
         }
@@ -36,7 +40,12 @@ namespace FilmowaBaza.Domain.Repositories
 
         public async Task<T> GetAsyncById(long id)
         {
-            return await _dbSet.FindAsync(id);
+            var result = await _dbSet.FindAsync(id);
+            if (result == null)
+            {
+                throw new AppException(ErrorCode.NotFound);
+            }
+            return result; 
         }
         public IQueryable<T> GetQueryable()
         {
@@ -44,16 +53,25 @@ namespace FilmowaBaza.Domain.Repositories
         }
         public async Task UpdateAsync(T entity)
         {
-            if (entity != null) 
+            if (entity == null) 
             {
-                entity.ModifiedAt = DateTime.UtcNow;
-                await Task.FromResult(_dbSet.Update(entity));
+                throw new AppException(ErrorCode.NotFound);
             }
+            entity.ModifiedAt = DateTime.UtcNow;
+            await Task.FromResult(_dbSet.Update(entity));
+
             await SaveChangesAsync();
         }
         public async Task SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception e)
+            {
+                throw new AppException(new ErrorCode("Error saving changes",System.Net.HttpStatusCode.Conflict));
+            }
         }
     }
 }
