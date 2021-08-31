@@ -1,4 +1,5 @@
-﻿using FilmowaBaza.Domain.Entities;
+﻿using System;
+using FilmowaBaza.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilmowaBaza.Domain
@@ -15,6 +16,12 @@ namespace FilmowaBaza.Domain
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseLazyLoadingProxies();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

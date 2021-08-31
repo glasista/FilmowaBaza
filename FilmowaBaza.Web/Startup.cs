@@ -1,9 +1,13 @@
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using FilmowaBaza.Domain;
+using FilmowaBaza.Domain.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +17,18 @@ namespace FilmowaBaza.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            // In ASP.NET Core 3.0 `env` will be an IWebHostingEnvironment, not IHostingEnvironment.
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -24,6 +37,19 @@ namespace FilmowaBaza.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policyBuilder =>
+                    {
+                        policyBuilder
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .SetIsOriginAllowed(origin => true);
+                    });
+            });
+
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +66,7 @@ namespace FilmowaBaza.Web
                 app.UseHsts();
             }
 
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -51,6 +78,10 @@ namespace FilmowaBaza.Web
             {
                 endpoints.MapRazorPages();
             });
+        }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new RepositoryModule());
         }
     }
 }
