@@ -16,7 +16,7 @@ namespace FilmowaBaza.Domain.Exceptions
         public AppException(ErrorCode errorCode, string message, Exception innerException)
             : base(message, innerException)
         {
-            ErrorCode = errorCode;
+            this.ErrorCode = errorCode;
         }
     }
 }

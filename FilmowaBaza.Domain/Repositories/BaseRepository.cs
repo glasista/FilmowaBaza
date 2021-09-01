@@ -70,7 +70,7 @@ namespace FilmowaBaza.Domain.Repositories
             }
             catch(Exception e)
             {
-                throw new AppException(new ErrorCode("Error saving changes",System.Net.HttpStatusCode.Conflict));
+                throw new AppException(new ErrorCode("Error saving changes",System.Net.HttpStatusCode.Conflict),e.Message,e);
             }
         }
     }

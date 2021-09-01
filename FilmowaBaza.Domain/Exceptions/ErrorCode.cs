@@ -8,8 +8,8 @@ namespace FilmowaBaza.Domain.Exceptions
         public string Message { get; set; }
         public ErrorCode(string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
         {
-            Message = message;
-            StatusCode = statusCode;
+            this.Message = message;
+            this.StatusCode = statusCode;
         }
         public static ErrorCode DomainValidationError => new ErrorCode(nameof(DomainValidationError), HttpStatusCode.UnprocessableEntity);
         public static ErrorCode NotFound => new ErrorCode(nameof(NotFound), HttpStatusCode.NotFound);

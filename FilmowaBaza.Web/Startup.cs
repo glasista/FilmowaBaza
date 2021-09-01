@@ -1,4 +1,5 @@
 using Autofac;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FilmowaBaza.API.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using FilmowaBaza.Infrastructure.Services.Interfaces;
 
 namespace FilmowaBaza.Web
 {
@@ -36,7 +45,6 @@ namespace FilmowaBaza.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -48,6 +56,8 @@ namespace FilmowaBaza.Web
                             .SetIsOriginAllowed(origin => true);
                     });
             });
+            services.AddMediatR(typeof(IService));
+            services.AddJwtAuth(Configuration);
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -72,6 +82,7 @@ namespace FilmowaBaza.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
