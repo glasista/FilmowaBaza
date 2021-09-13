@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmowaBaza.Domain", "Filmo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmowaBaza.Infrastructure", "FilmowaBaza.Infrastructure\FilmowaBaza.Infrastructure.csproj", "{90B43AFC-34E6-4499-AD6F-E0445F13F8E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmowaBaza.API", "FilmowaBaza.Web\FilmowaBaza.API.csproj", "{1D58B0CA-B315-4650-8A34-543C138D18C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmowaBaza.API", "FilmowaBaza.API\FilmowaBaza.API.csproj", "{1D58B0CA-B315-4650-8A34-543C138D18C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@ namespace FilmowaBaza.API.Controllers
     public abstract class BaseController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private long userId => GetLoggedUserId();
+        private long UserId => GetLoggedUserId();
         protected BaseController(IMediator mediator)
         {
             this._mediator = mediator;
@@ -21,11 +21,11 @@ namespace FilmowaBaza.API.Controllers
         {
             if(request is AbstractAuthQuery)
             {
-                (request as AbstractAuthQuery).UserId = userId;
+                (request as AbstractAuthQuery).UserId = UserId;
             }
             if(request is AbstractAuthCommand)
             {
-                (request as AbstractAuthCommand).UserId = userId;
+                (request as AbstractAuthCommand).UserId = UserId;
             }
 
             return await _mediator.Send(request);
