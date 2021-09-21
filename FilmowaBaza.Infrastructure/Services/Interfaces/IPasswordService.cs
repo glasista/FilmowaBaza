@@ -2,7 +2,7 @@
 {
     public interface IPasswordService : IService
     {
-        string HashedPassword(string password);
+        string HashPassword(string password);
         void VerifyPassword(string password, string passwordHash);
     }
 }

@@ -16,6 +16,9 @@ namespace FilmowaBaza.API.Controllers
         }
         [HttpPost]
         public async Task<ActionResult> Login([FromBody] UserLoginQuery query)
-            => Ok(await Handle(query));
+        {
+            await _mediator.Send(query);
+            return Ok();
+        }
     }
 }

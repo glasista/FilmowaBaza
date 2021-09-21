@@ -6,7 +6,7 @@ namespace FilmowaBaza.Infrastructure.Services
 {
     public class PasswordService : IPasswordService
     {
-        public string HashedPassword(string password)
+        public string HashPassword(string password)
         {
             if (String.IsNullOrEmpty(password))
             {

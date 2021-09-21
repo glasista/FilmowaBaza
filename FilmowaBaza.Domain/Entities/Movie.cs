@@ -5,13 +5,13 @@ namespace FilmowaBaza.Domain.Entities
 {
     public class Movie : BaseEntity<long>
     {
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public decimal Rating { get; protected set; }
-        public DateTime ReleaseDate { get; protected set; }
-        public virtual IList<Category> Categories { get; protected set; }
-        public virtual IList<Actor> Actors { get; protected set; }
-        public virtual IList<Rate> Rates { get; protected set; }
-        public virtual IList<Comment> Comments { get; protected set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Rating { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public virtual IList<Category> Categories { get; set; }
+        public virtual IList<Actor> Actors { get; set; }
+        public virtual IList<Rate> Rates { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
     }
 }

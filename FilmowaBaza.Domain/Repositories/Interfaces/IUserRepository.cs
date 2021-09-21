@@ -6,5 +6,6 @@ namespace FilmowaBaza.Domain.Repositories.Interfaces
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<User> GetByEmail(string email);
+        Task<bool> IsEmailAlreadyExists(string email);
     }
 }

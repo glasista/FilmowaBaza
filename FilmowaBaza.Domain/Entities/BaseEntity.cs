@@ -8,7 +8,7 @@ namespace FilmowaBaza.Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual Tkey Id { get; protected set; }
+        public virtual Tkey Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }

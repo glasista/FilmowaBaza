@@ -13,9 +13,13 @@ namespace FilmowaBaza.Domain.Repositories
             this._context = context;
         }
 
-        public Task<User> GetByEmail(string email)
+        public async Task<User> GetByEmail(string email)
         {
-            return _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+            return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+        }
+        public async Task<bool> IsEmailAlreadyExists(string email)
+        {
+            return await _context.Users.AnyAsync(u => u.Email == email);
         }
     }
 }
