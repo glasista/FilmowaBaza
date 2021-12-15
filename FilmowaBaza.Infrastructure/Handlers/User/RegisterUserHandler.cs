@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FilmowaBaza.Infrastructure.Handlers.User
 {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Unit>
+    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, long>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordService _passwordService;
@@ -20,7 +20,7 @@ namespace FilmowaBaza.Infrastructure.Handlers.User
             this._passwordService = passwordService;
             this.userServiceMapper = userServiceMapper;
         }
-        public async Task<Unit> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
+        public async Task<long> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
         {
             if(await _userRepository.IsEmailAlreadyExists(command.Email))
             {
