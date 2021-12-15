@@ -1,9 +1,6 @@
 ﻿using Autofac;
 using FilmowaBaza.Infrastructure.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace FilmowaBaza.Infrastructure.Modules
 {

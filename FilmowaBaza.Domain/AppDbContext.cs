@@ -1,5 +1,4 @@
-﻿using System;
-using FilmowaBaza.Domain.Entities;
+﻿using FilmowaBaza.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilmowaBaza.Domain

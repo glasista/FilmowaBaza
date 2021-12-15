@@ -11,6 +11,7 @@ using FilmowaBaza.Domain.Modules;
 using FilmowaBaza.API.Extensions;
 using FilmowaBaza.Infrastructure.Services.Interfaces;
 using FilmowaBaza.Infrastructure.Modules;
+using FilmowaBaza.API.Filters;
 
 namespace FilmowaBaza.API
 {
@@ -47,9 +48,12 @@ namespace FilmowaBaza.API
                             .SetIsOriginAllowed(origin => true);
                     });
             });
-
+            services.AddControllers(options =>{
+                options.Filters.Add(typeof(ValidationFilter));
+            });
             services.AddMediatR(typeof(IService));
             services.AddJwtAuth(Configuration);
+            services.AddSwagger();
             
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
@@ -79,6 +83,12 @@ namespace FilmowaBaza.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(o =>
+            {
+                o.SwaggerEndpoint("/swagger/v1/swagger.json", "FilmowaBaza API V1");
+                o.RoutePrefix = string.Empty;
+            });
 
             app.UseEndpoints(endpoints =>
             {
