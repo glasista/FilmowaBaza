@@ -13,5 +13,6 @@ namespace FilmowaBaza.Domain.Entities
         public virtual IList<Actor> Actors { get; set; }
         public virtual IList<Rate> Rates { get; set; }
         public virtual IList<Comment> Comments { get; set; }
+        public virtual IList<Picture> Pictures { get; set; }
     }
 }

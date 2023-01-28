@@ -1,5 +1,6 @@
 using Autofac;
 using MediatR;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +13,14 @@ using FilmowaBaza.API.Extensions;
 using FilmowaBaza.Infrastructure.Services.Interfaces;
 using FilmowaBaza.Infrastructure.Modules;
 using FilmowaBaza.API.Filters;
+using System;
+using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 namespace FilmowaBaza.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
         public Startup(IWebHostEnvironment env)
         {
             // In ASP.NET Core 3.0 `env` will be an IWebHostingEnvironment, not IHostingEnvironment.
@@ -43,17 +43,21 @@ namespace FilmowaBaza.API
                     policyBuilder =>
                     {
                         policyBuilder
+                            .SetIsOriginAllowed(origin => true)
                             .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .SetIsOriginAllowed(origin => true);
+                            .AllowAnyMethod();
                     });
             });
             services.AddControllers(options =>{
                 options.Filters.Add(typeof(ValidationFilter));
             });
+
             services.AddMediatR(typeof(IService));
-            services.AddJwtAuth(Configuration);
-            services.AddSwagger();
+            services.AddJwtAuthentication(Configuration);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FilmowaBaza API", Version = "v1" });
+            });
             
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
@@ -75,7 +79,7 @@ namespace FilmowaBaza.API
 
             app.UseCors();
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             app.UseRouting();
 

@@ -1,19 +1,10 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:29542",
-      "sslPort": 44343
-    }
-  },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-        "SecretKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSYWZhbCIsIm5hbWUiOiJSdXN6YWxhIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.gWd9nOZ0L6fLUKBeRrlngwImjwXIIPxdXewOng0YG32W3S_dtAFCMnshtzId81nMeUx_gLR_YHyZB_q_D9wWGaPNpAn3vz7ML87N8rTOSfVYwaEhfotSlPHM8RUg649TqkopedxYFOy7R5iKeg86aDELgE4iBYKXGLaGrUnokVi8VZsxrbD5NKY2LuqVDsSZR-pgU3NNKOXcDTcechXT7LIHE3OauzV4wf5LeIyFA3AmSkKD9YDUNv-bi-9-tLjPckax7sxdC5tTvZzsjx_LKbqjlZiuDdd7oONwVEjPdGfJaPXbqHHtKCmU4Lqq2ZZXP6vWnzK6nPOoZb8LmvrcaA"
       }
     },
     "FilmowaBaza.Web": {
@@ -31,6 +22,14 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "useSSL": true
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:29542",
+      "sslPort": 44343
     }
   }
 }

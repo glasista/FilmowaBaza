@@ -9,7 +9,7 @@ namespace FilmowaBaza.API.Extensions
 {
     public static class AuthExtensions
     {
-        public static void AddJwtAuth(this IServiceCollection services, IConfiguration configuration)
+        public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var settings = configuration.GetSection("JWTSettings").Get<JWTSettings>();
             var keyBytes = Encoding.ASCII.GetBytes(settings.SecretKey);

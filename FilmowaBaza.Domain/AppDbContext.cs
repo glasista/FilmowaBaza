@@ -23,6 +23,7 @@ namespace FilmowaBaza.Domain
         public DbSet<Comment> Comments{ get; set; }
         public DbSet<Rate> Rates { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
