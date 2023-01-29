@@ -18,7 +18,7 @@ namespace FilmowaBaza.Infrastructure.Services
         }
         public string CreateToken(long userId)
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             var claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
@@ -33,7 +33,6 @@ namespace FilmowaBaza.Infrastructure.Services
             var jwt = new JwtSecurityToken(
                 issuer: _settings.Issuer,
                 claims: claims,
-                notBefore: now,
                 expires: expires,
                 signingCredentials: signingCredentails
                 );

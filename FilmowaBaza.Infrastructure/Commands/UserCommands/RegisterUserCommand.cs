@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace FilmowaBaza.Infrastructure.Commands
+namespace FilmowaBaza.Infrastructure.Commands.UserCommands
 {
     public class RegisterUserCommand : IRequest<long>
     {

@@ -1,6 +1,6 @@
 ﻿using FilmowaBaza.Domain.Exceptions;
 using FilmowaBaza.Domain.Repositories.Interfaces;
-using FilmowaBaza.Infrastructure.Commands;
+using FilmowaBaza.Infrastructure.Commands.UserCommands;
 using FilmowaBaza.Infrastructure.Services.Interfaces;
 using MediatR;
 using System.Threading;

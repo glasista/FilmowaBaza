@@ -20,7 +20,7 @@ namespace FilmowaBaza.Domain.Repositories
         }
         public async Task AddAsync(T entity)
         {
-            entity.CreatedAt = DateTime.UtcNow;
+            entity.CreatedAt = DateTime.Now;
             await _context.AddAsync(entity);
             await SaveChangesAsync();
         }
@@ -57,7 +57,7 @@ namespace FilmowaBaza.Domain.Repositories
             {
                 throw new AppException(ErrorCode.NotFound);
             }
-            entity.ModifiedAt = DateTime.UtcNow;
+            entity.ModifiedAt = DateTime.Now;
             await Task.FromResult(_dbSet.Update(entity));
 
             await SaveChangesAsync();

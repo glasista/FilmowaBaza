@@ -1,5 +1,5 @@
 ﻿using FilmowaBaza.Domain.Entities;
-using FilmowaBaza.Infrastructure.Commands;
+using FilmowaBaza.Infrastructure.Commands.UserCommands;
 using FilmowaBaza.Infrastructure.DTOs;
 using FilmowaBaza.Infrastructure.Services.Interfaces;
 

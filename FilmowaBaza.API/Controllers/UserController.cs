@@ -1,4 +1,4 @@
-﻿using FilmowaBaza.Infrastructure.Commands;
+﻿using FilmowaBaza.Infrastructure.Commands.UserCommands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
