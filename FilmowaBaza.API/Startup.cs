@@ -54,10 +54,7 @@ namespace FilmowaBaza.API
 
             services.AddMediatR(typeof(IService));
             services.AddJwtAuthentication(Configuration);
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FilmowaBaza API", Version = "v1" });
-            });
+            services.AddSwagger();
             
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
@@ -87,12 +84,16 @@ namespace FilmowaBaza.API
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSwagger();
-            app.UseSwaggerUI(o =>
-            {
-                o.SwaggerEndpoint("/swagger/v1/swagger.json", "FilmowaBaza API V1");
-                o.RoutePrefix = string.Empty;
-            });
+            //app.UseSwagger(options =>
+            //{
+            //    options.SerializeAsV2= true;
+            //});
+            //app.UseSwaggerUI(o =>
+            //{
+            //    o.SwaggerEndpoint("/swagger/v1.1/swagger.json", "FilmowaBaza API V1");
+            //    o.RoutePrefix = string.Empty;
+            //});
+            app.UseSwaggerExtension();
 
             app.UseEndpoints(endpoints =>
             {

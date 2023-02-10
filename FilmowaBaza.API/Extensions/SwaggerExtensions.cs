@@ -15,13 +15,13 @@ namespace FilmowaBaza.API.Extensions
         public static void AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(o => {
-                o.SwaggerDoc("v1.0", new OpenApiInfo { Title = "FilmowaBaza API", Version = "v1.0" });
+                o.SwaggerDoc("v1.1", new OpenApiInfo { Title = "FilmowaBaza API", Version = "v1.1" });
                 o.AddSecurityDefinition("Bearer", // Name of the security scheme
                     new OpenApiSecurityScheme
                     {
                         Name = "Authorization",
                         Description = "JWT Authorization header with the Bearer authentication scheme",
-                        Type = SecuritySchemeType.Http, //type scheme http for bearer authentication
+                        Type = SecuritySchemeType.ApiKey, //type scheme http for bearer authentication
                         In = ParameterLocation.Header,
                         BearerFormat = "JWT"
                     });
@@ -38,17 +38,16 @@ namespace FilmowaBaza.API.Extensions
                 o.OperationFilter<AuthOperationFilter>();
             });
         }
-
         public static void UseSwaggerExtension(this IApplicationBuilder appBuilder)
         {
             appBuilder.UseSwagger();
+            appBuilder.UseSwaggerUI();
         }
-
         public static void UseSwaggerUI(this IApplicationBuilder appBuilder)
         {
             appBuilder.UseSwaggerUI(x =>
             {
-                x.SwaggerEndpoint("/swagger/v1.0/swagger.json", "API V1.0");
+                x.SwaggerEndpoint("/swagger/v1.1/swagger.json", "API V1.1");
                 x.RoutePrefix = string.Empty;
             });
         }
